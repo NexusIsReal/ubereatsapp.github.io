@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uber Eats Auto - Demo</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Demo-specific styles */
+        .demo-banner {
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .demo-controls {
+            background: #f8f9fa;
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .demo-btn {
+            padding: 8px 16px;
+            background: #2481cc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+        
+        .demo-btn:hover {
+            background: #1e6bb8;
+            transform: translateY(-1px);
+        }
+        
+        .demo-input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            min-width: 200px;
+        }
+        
+        .demo-info {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px;
+            color: #1976d2;
+        }
+        
+        .demo-info h4 {
+            margin: 0 0 10px 0;
+            color: #1976d2;
+        }
+        
+        .demo-info ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .demo-info li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        🚀 DEMO MODE - This is a preview of the Telegram Mini App
+    </div>
+    
+    <!-- Demo Controls -->
+    <div class="demo-controls">
+        <button class="demo-btn" onclick="fillSampleUrl()">📋 Fill Sample URL</button>
+        <button class="demo-btn" onclick="simulateProcessing()">⚡ Simulate Processing</button>
+        <button class="demo-btn" onclick="showSuccessDemo()">✅ Show Success</button>
+        <button class="demo-btn" onclick="showErrorDemo()">❌ Show Error</button>
+        <button class="demo-btn" onclick="clearAll()">🗑️ Clear All</button>
+        <input type="text" class="demo-input" id="customUrl" placeholder="Enter custom URL to test">
+        <button class="demo-btn" onclick="fillCustomUrl()">Use Custom URL</button>
+    </div>
+    
+    <!-- Demo Info -->
+    <div class="demo-info">
+        <h4>🎯 Demo Features:</h4>
+        <ul>
+            <li><strong>Fill Sample URL:</strong> Automatically fills a sample Uber Eats group cart URL</li>
+            <li><strong>Simulate Processing:</strong> Shows the complete loading flow with progress steps</li>
+            <li><strong>Show Success/Error:</strong> Demonstrates toast notifications</li>
+            <li><strong>Clear All:</strong> Resets the form and recent carts</li>
+            <li><strong>Custom URL:</strong> Test with your own Uber Eats group cart URL</li>
+        </ul>
+        <p><strong>Note:</strong> This demo runs in browser mode. In Telegram, it will integrate with the Telegram WebApp API for enhanced functionality.</p>
+    </div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">🍔</div>
+                    <h1>Uber Eats Auto</h1>
+                </div>
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Demo Mode</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-card">
+                    <h2>Welcome to Uber Eats Auto! 🚀</h2>
+                    <p>Automate your Uber Eats group orders with promo codes and payment processing.</p>
+                </div>
+            </section>
+
+            <!-- Group Cart URL Input -->
+            <section class="input-section">
+                <div class="input-card">
+                    <div class="card-header">
+                        <h3>📋 Group Cart URL</h3>
+                        <div class="help-icon" onclick="showHelp()">❓</div>
+                    </div>
+                    
+                    <form id="cartForm" class="cart-form">
+                        <div class="input-group">
+                            <label for="cartUrl">Paste your Uber Eats group cart URL here:</label>
+                            <div class="url-input-container">
+                                <input 
+                                    type="url" 
+                                    id="cartUrl" 
+                                    name="cartUrl" 
+                                    placeholder="https://www.ubereats.com/group/..."
+                                    required
+                                >
+                                <button type="button" class="paste-btn" onclick="pasteFromClipboard()">
+                                    📋 Paste
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="primary-btn">
+                                <span class="btn-icon">🚀</span>
+                                Start Automation
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Recent Carts -->
+            <section class="recent-section">
+                <div class="recent-card">
+                    <div class="card-header">
+                        <h3>📚 Recent Carts</h3>
+                        <button class="clear-btn" onclick="clearRecent()">Clear All</button>
+                    </div>
+                    
+                    <div id="recentCarts" class="recent-list">
+                        <div class="empty-state">
+                            <div class="empty-icon">📝</div>
+                            <p>No recent carts yet</p>
+                            <small>Your processed carts will appear here</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section class="settings-section">
+                <div class="settings-card">
+                    <div class="card-header">
+                        <h3>⚙️ Settings</h3>
+                    </div>
+                    
+                    <div class="settings-list">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Promo Code</h4>
+                                <p>Default promo code to apply</p>
+                            </div>
+                            <input type="text" id="promoCode" value="eats-379asfbupf" class="setting-input">
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Auto Payment</h4>
+                                <p>Automatically process payment</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="autoPayment" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Credit Card</h4>
+                                <p>Use saved credit card</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="useSavedCard" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p>Made with ❤️ for Uber Eats automation</p>
+                <div class="footer-links">
+                    <a href="#" onclick="showAbout()">About</a>
+                    <a href="#" onclick="showSupport()">Support</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h3>Processing Your Order...</h3>
+            <p id="loadingText">Connecting to Uber Eats...</p>
+            <div class="loading-steps">
+                <div class="step active" id="step1">
+                    <span class="step-icon">🔗</span>
+                    <span class="step-text">Connecting</span>
+                </div>
+                <div class="step" id="step2">
+                    <span class="step-icon">🎟️</span>
+                    <span class="step-text">Applying Promo</span>
+                </div>
+                <div class="step" id="step3">
+                    <span class="step-icon">💳</span>
+                    <span class="step-text">Processing Payment</span>
+                </div>
+                <div class="step" id="step4">
+                    <span class="step-icon">✅</span>
+                    <span class="step-text">Complete</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>How to get your Group Cart URL</h3>
+                <button class="close-btn" onclick="hideHelp()">✕</button>
+            </div>
+            <div class="modal-body">
+                <ol class="help-steps">
+                    <li>Open Uber Eats in your browser</li>
+                    <li>Create or join a group order</li>
+                    <li>Copy the URL from your browser's address bar</li>
+                    <li>Paste it in the input field above</li>
+                </ol>
+                <div class="help-example">
+                    <strong>Example URL:</strong>
+                    <code>https://www.ubereats.com/group/abc123def456</code>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="successToast" class="toast success-toast hidden">
+        <div class="toast-content">
+            <span class="toast-icon">✅</span>
+            <span class="toast-message">Order processed successfully!</span>
+        </div>
+    </div>
+
+    <!-- Error Toast -->
+    <div id="errorToast" class="toast error-toast hidden">
+        <div class="toast-content">
+            <span class="toast-icon">❌</span>
+            <span class="toast-message">Something went wrong. Please try again.</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Demo-specific functions
+        function fillSampleUrl() {
+            const sampleUrl = "https://www.ubereats.com/group/abc123def456ghi789";
+            document.getElementById('cartUrl').value = sampleUrl;
+            document.getElementById('cartUrl').focus();
+            if (window.app) {
+                window.app.showSuccess('Sample URL filled!');
+            }
+        }
+        
+        function fillCustomUrl() {
+            const customUrl = document.getElementById('customUrl').value.trim();
+            if (customUrl) {
+                document.getElementById('cartUrl').value = customUrl;
+                document.getElementById('cartUrl').focus();
+                if (window.app) {
+                    window.app.showSuccess('Custom URL filled!');
+                }
+            } else {
+                if (window.app) {
+                    window.app.showError('Please enter a URL first');
+                }
+            }
+        }
+        
+        function simulateProcessing() {
+            if (window.app) {
+                const cartUrl = document.getElementById('cartUrl').value || "https://www.ubereats.com/group/demo123";
+                window.app.processCart(cartUrl);
+            }
+        }
+        
+        function showSuccessDemo() {
+            if (window.app) {
+                window.app.showSuccess('This is a demo success message!');
+            }
+        }
+        
+        function showErrorDemo() {
+            if (window.app) {
+                window.app.showError('This is a demo error message!');
+            }
+        }
+        
+        function clearAll() {
+            document.getElementById('cartUrl').value = '';
+            document.getElementById('customUrl').value = '';
+            if (window.app) {
+                window.app.clearRecent();
+                window.app.showSuccess('All data cleared!');
+            }
+        }
+        
+        // Override the app initialization for demo mode
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize the app
+            window.app = new UberEatsMiniApp();
+            
+            // Add demo-specific styling
+            document.body.classList.add('demo-mode');
+            
+            // Show demo info
+            console.log('🚀 Demo mode activated!');
+            console.log('Available demo functions:');
+            console.log('- fillSampleUrl()');
+            console.log('- simulateProcessing()');
+            console.log('- showSuccessDemo()');
+            console.log('- showErrorDemo()');
+            console.log('- clearAll()');
+        });
+    </script>
+</body>
+</html>

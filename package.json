@@ -1,0 +1,79 @@
+{
+  "name": "uber-eats-auto-telegram-mini-app",
+  "version": "1.0.0",
+  "description": "Telegram Mini App for Uber Eats automation with group cart processing",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "python -m http.server 8000",
+    "dev": "python -m http.server 8000",
+    "build": "echo 'No build process needed for static files'",
+    "test": "echo 'Open demo.html in browser to test'",
+    "deploy": "echo 'Deploy to your hosting service'"
+  },
+  "keywords": [
+    "telegram",
+    "mini-app",
+    "uber-eats",
+    "automation",
+    "group-orders",
+    "promo-codes",
+    "payment-processing",
+    "web-app",
+    "pwa"
+  ],
+  "author": {
+    "name": "Uber Eats Auto Team",
+    "email": "support@ubereatsauto.com",
+    "url": "https://ubereatsauto.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/uber-eats-auto-telegram-mini-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/uber-eats-auto-telegram-mini-app/issues"
+  },
+  "homepage": "https://ubereatsauto.com",
+  "engines": {
+    "node": ">=14.0.0",
+    "python": ">=3.6.0"
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "telegram": {
+    "bot_username": "UberEatsAutoBot",
+    "web_app_url": "https://ubereatsauto.com",
+    "commands": [
+      {
+        "command": "start",
+        "description": "Start the Uber Eats automation"
+      },
+      {
+        "command": "help",
+        "description": "Get help with using the app"
+      },
+      {
+        "command": "settings",
+        "description": "Open app settings"
+      }
+    ]
+  },
+  "pwa": {
+    "name": "Uber Eats Auto",
+    "short_name": "UberEatsAuto",
+    "theme_color": "#2481cc",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "orientation": "portrait",
+    "scope": "/",
+    "start_url": "/"
+  }
+}

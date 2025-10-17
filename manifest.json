@@ -1,0 +1,192 @@
+{
+  "name": "Uber Eats Auto",
+  "short_name": "UberEatsAuto",
+  "description": "Automate your Uber Eats group orders with promo codes and payment processing",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#2481cc",
+  "background_color": "#ffffff",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["food", "utilities", "productivity"],
+  "icons": [
+    {
+      "src": "icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/desktop-screenshot.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Uber Eats Auto Desktop View"
+    },
+    {
+      "src": "screenshots/mobile-screenshot.png",
+      "sizes": "375x812",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Uber Eats Auto Mobile View"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Quick Process",
+      "short_name": "Process",
+      "description": "Quickly process a group cart",
+      "url": "/?action=quick",
+      "icons": [
+        {
+          "src": "icons/shortcut-process.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Recent Carts",
+      "short_name": "Recent",
+      "description": "View recent processed carts",
+      "url": "/?action=recent",
+      "icons": [
+        {
+          "src": "icons/shortcut-recent.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://ubereatsauto.com/manifest.json"
+    }
+  ],
+  "prefer_related_applications": false,
+  "telegram_web_app": {
+    "bot_username": "UberEatsAutoBot",
+    "app_name": "Uber Eats Auto",
+    "app_version": "1.0.0",
+    "supports_web_app": true,
+    "supports_inline_queries": false,
+    "supports_callback_queries": true,
+    "supports_payments": false,
+    "supports_commands": [
+      {
+        "command": "start",
+        "description": "Start the Uber Eats automation"
+      },
+      {
+        "command": "help",
+        "description": "Get help with using the app"
+      },
+      {
+        "command": "settings",
+        "description": "Open app settings"
+      }
+    ],
+    "web_app_url": "https://ubereatsauto.com",
+    "launch_url": "https://ubereatsauto.com/launch",
+    "theme": {
+      "primary_color": "#2481cc",
+      "secondary_color": "#4fc3f7",
+      "background_color": "#ffffff",
+      "text_color": "#000000",
+      "hint_color": "#999999",
+      "link_color": "#2481cc",
+      "button_color": "#2481cc",
+      "button_text_color": "#ffffff"
+    },
+    "features": [
+      "group_cart_processing",
+      "promo_code_application",
+      "payment_automation",
+      "recent_carts_history",
+      "settings_management"
+    ],
+    "permissions": [
+      "clipboard_read",
+      "local_storage",
+      "notifications"
+    ],
+    "capabilities": [
+      "url_validation",
+      "form_processing",
+      "data_persistence",
+      "error_handling",
+      "loading_states"
+    ]
+  },
+  "content_security_policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://telegram.org; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://www.ubereats.com https://api.ubereats.com; font-src 'self' data:;",
+  "permissions": [
+    "storage",
+    "clipboardRead",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "https://www.ubereats.com/*",
+    "https://api.ubereats.com/*"
+  ],
+  "web_accessible_resources": [
+    "icons/*",
+    "screenshots/*"
+  ],
+  "author": {
+    "name": "Uber Eats Auto Team",
+    "email": "support@ubereatsauto.com",
+    "url": "https://ubereatsauto.com"
+  },
+  "homepage_url": "https://ubereatsauto.com",
+  "support_url": "https://ubereatsauto.com/support",
+  "privacy_policy_url": "https://ubereatsauto.com/privacy",
+  "terms_of_service_url": "https://ubereatsauto.com/terms"
+}

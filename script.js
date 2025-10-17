@@ -9,7 +9,6 @@ class UberEatsMiniApp {
     init() {
         this.setupTelegramWebApp();
         this.setupEventListeners();
-        this.loadSettings();
         this.renderRecentCarts();
         this.setupFormValidation();
     }
@@ -48,11 +47,6 @@ class UberEatsMiniApp {
         cartUrlInput.addEventListener('input', (e) => this.validateUrl(e.target.value));
         cartUrlInput.addEventListener('paste', (e) => this.handlePaste(e));
 
-        // Settings changes
-        const settingsInputs = document.querySelectorAll('.setting-input, .toggle-switch input');
-        settingsInputs.forEach(input => {
-            input.addEventListener('change', () => this.saveSettings());
-        });
 
         // Telegram main button
         if (this.telegram) {
@@ -130,13 +124,8 @@ class UberEatsMiniApp {
 
     async sendToBackend(cartUrl) {
         // This will be implemented when backend is ready
-        const settings = this.getSettings();
-        
         const payload = {
             cartUrl: cartUrl,
-            promoCode: settings.promoCode,
-            autoPayment: settings.autoPayment,
-            useSavedCard: settings.useSavedCard,
             timestamp: new Date().toISOString()
         };
 
@@ -386,37 +375,6 @@ class UberEatsMiniApp {
         }
     }
 
-    // Settings Management
-    loadSettings() {
-        try {
-            const saved = localStorage.getItem('uberEatsSettings');
-            if (saved) {
-                const settings = JSON.parse(saved);
-                document.getElementById('promoCode').value = settings.promoCode || 'eats-379asfbupf';
-                document.getElementById('autoPayment').checked = settings.autoPayment !== false;
-                document.getElementById('useSavedCard').checked = settings.useSavedCard !== false;
-            }
-        } catch (error) {
-            console.error('Error loading settings:', error);
-        }
-    }
-
-    saveSettings() {
-        const settings = this.getSettings();
-        try {
-            localStorage.setItem('uberEatsSettings', JSON.stringify(settings));
-        } catch (error) {
-            console.error('Error saving settings:', error);
-        }
-    }
-
-    getSettings() {
-        return {
-            promoCode: document.getElementById('promoCode').value,
-            autoPayment: document.getElementById('autoPayment').checked,
-            useSavedCard: document.getElementById('useSavedCard').checked
-        };
-    }
 
     // Utility functions
     delay(ms) {
@@ -445,18 +403,13 @@ document.addEventListener('DOMContentLoaded', () => {
 // Handle page visibility changes
 document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
-        // Page is hidden, save current state
-        if (window.app) {
-            window.app.saveSettings();
-        }
+        // Page is hidden
     }
 });
 
 // Handle beforeunload
 window.addEventListener('beforeunload', () => {
-    if (window.app) {
-        window.app.saveSettings();
-    }
+    // App cleanup
 });
 
 // Export for global access

@@ -202,27 +202,6 @@ class UberEatsMiniApp {
         }, 100);
     }
 
-    async pasteFromClipboard() {
-        try {
-            if (navigator.clipboard && navigator.clipboard.readText) {
-                const text = await navigator.clipboard.readText();
-                const cartUrlInput = document.getElementById('cartUrl');
-                cartUrlInput.value = text;
-                cartUrlInput.focus();
-                
-                if (this.isValidUberEatsUrl(text)) {
-                    this.showSuccess('URL pasted successfully!');
-                } else {
-                    this.showError('Invalid Uber Eats URL in clipboard');
-                }
-            } else {
-                this.showError('Clipboard access not available');
-            }
-        } catch (error) {
-            console.error('Clipboard error:', error);
-            this.showError('Failed to access clipboard');
-        }
-    }
 
     showLoading() {
         const overlay = document.getElementById('loadingOverlay');

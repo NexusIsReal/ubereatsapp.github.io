@@ -19,16 +19,16 @@ class UberEatsMiniApp {
             this.telegram.ready();
             this.telegram.expand();
             
-            // Set theme colors
-            this.telegram.setHeaderColor('#2481cc');
-            this.telegram.setBackgroundColor('#ffffff');
+            // Set theme colors to match our design
+            this.telegram.setHeaderColor('#8B5CF6');
+            this.telegram.setBackgroundColor('#8B5CF6');
             
             // Enable closing confirmation
             this.telegram.enableClosingConfirmation();
             
             // Set main button
             this.telegram.MainButton.setText('Start Automation');
-            this.telegram.MainButton.color = '#2481cc';
+            this.telegram.MainButton.color = '#F59E0B';
             this.telegram.MainButton.textColor = '#ffffff';
             
             console.log('Telegram WebApp initialized');

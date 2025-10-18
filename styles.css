@@ -46,7 +46,7 @@
 
 body {
     font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive, sans-serif;
-    background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 50%, #C4B5FD 100%);
+    background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 50%, #C4B5FD 100%) !important;
     color: #1A202C;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
@@ -54,6 +54,20 @@ body {
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
+}
+
+/* Override Telegram WebApp styles */
+.tg-viewport {
+    background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 50%, #C4B5FD 100%) !important;
+}
+
+.tg-viewport .tg-viewport__header {
+    background: #8B5CF6 !important;
+    color: white !important;
+}
+
+.tg-viewport .tg-viewport__footer {
+    background: white !important;
 }
 
 body::before {

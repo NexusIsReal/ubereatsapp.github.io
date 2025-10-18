@@ -85,11 +85,11 @@
     
     <!-- Demo Controls -->
     <div class="demo-controls">
-        <button class="demo-btn" onclick="fillSampleUrl()">📋 Fill Sample URL</button>
-        <button class="demo-btn" onclick="simulateProcessing()">⚡ Simulate Processing</button>
-        <button class="demo-btn" onclick="showSuccessDemo()">✅ Show Success</button>
-        <button class="demo-btn" onclick="showErrorDemo()">❌ Show Error</button>
-        <button class="demo-btn" onclick="clearAll()">🗑️ Clear All</button>
+        <button class="demo-btn" onclick="fillSampleUrl()"><i class="fas fa-clipboard"></i> Fill Sample URL</button>
+        <button class="demo-btn" onclick="simulateProcessing()"><i class="fas fa-bolt"></i> Simulate Processing</button>
+        <button class="demo-btn" onclick="showSuccessDemo()"><i class="fas fa-check"></i> Show Success</button>
+        <button class="demo-btn" onclick="showErrorDemo()"><i class="fas fa-times"></i> Show Error</button>
+        <button class="demo-btn" onclick="clearAll()"><i class="fas fa-trash"></i> Clear All</button>
         <input type="text" class="demo-input" id="customUrl" placeholder="Enter custom URL to test">
         <button class="demo-btn" onclick="fillCustomUrl()">Use Custom URL</button>
     </div>
@@ -268,7 +268,7 @@
                     <span class="step-text">Processing Payment</span>
                 </div>
                 <div class="step" id="step4">
-                    <span class="step-icon">✅</span>
+                    <i class="fas fa-check step-icon"></i>
                     <span class="step-text">Complete</span>
                 </div>
             </div>
@@ -300,7 +300,7 @@
     <!-- Success Toast -->
     <div id="successToast" class="toast success-toast hidden">
         <div class="toast-content">
-            <span class="toast-icon">✅</span>
+            <i class="fas fa-check toast-icon"></i>
             <span class="toast-message">Order processed successfully!</span>
         </div>
     </div>
@@ -308,7 +308,7 @@
     <!-- Error Toast -->
     <div id="errorToast" class="toast error-toast hidden">
         <div class="toast-content">
-            <span class="toast-icon">❌</span>
+            <i class="fas fa-times toast-icon"></i>
             <span class="toast-message">Something went wrong. Please try again.</span>
         </div>
     </div>

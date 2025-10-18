@@ -27,31 +27,86 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Welcome Section -->
-            <section class="welcome-section">
-                <div class="welcome-card">
-                    <h2>Welcome to I'm Hungry! 🚀</h2>
-                    <p>Automate your Uber Eats group orders with promo codes and payment processing.</p>
+            <!-- Promotional Section -->
+            <section class="promo-section">
+                <div class="promo-card">
+                    <div class="promo-offer">
+                        <h2>40% OFF + FREE DELIVERY</h2>
+                        <p>Subtotals between $20-$25</p>
+                    </div>
                 </div>
             </section>
 
-            <!-- Group Cart URL Input -->
-            <section class="input-section">
-                <div class="input-card">
-                    <div class="card-header">
-                        <h3>📋 Group Cart URL</h3>
-                        <div class="help-icon" onclick="showHelp()">❓</div>
+            <!-- Payment Methods Section -->
+            <section class="payment-section">
+                <div class="payment-card">
+                    <h3>Payment Methods:</h3>
+                    <div class="payment-options">
+                        <button class="payment-btn active">
+                            <span class="payment-icon">💳</span>
+                            Zelle
+                        </button>
+                        <button class="payment-btn">
+                            <span class="payment-icon">₿</span>
+                            B Crypto
+                        </button>
                     </div>
-                    
+                </div>
+            </section>
+
+            <!-- Balance Section -->
+            <section class="balance-section">
+                <div class="balance-card">
+                    <div class="balance-info">
+                        <span class="balance-icon">💰</span>
+                        <div class="balance-details">
+                            <span class="balance-label">Balance</span>
+                            <span class="balance-amount">$0.00</span>
+                        </div>
+                    </div>
+                    <button class="add-funds-btn">Add Funds +</button>
+                </div>
+            </section>
+
+            <!-- Order Type Selection -->
+            <section class="order-type-section">
+                <div class="order-type-card">
+                    <div class="order-type-buttons">
+                        <button class="order-type-btn active">
+                            <span class="order-icon">🚚</span>
+                            Delivery
+                        </button>
+                        <button class="order-type-btn">
+                            <span class="order-icon">🛍️</span>
+                            Pickup
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Order Details Section -->
+            <section class="order-details-section">
+                <div class="order-details-card">
                     <form id="cartForm" class="cart-form">
                         <div class="input-group">
-                            <label for="cartUrl">Paste your Uber Eats group cart URL here:</label>
+                            <label for="fullName">Full Name *</label>
+                            <input 
+                                type="text" 
+                                id="fullName" 
+                                name="fullName" 
+                                placeholder="Enter your full name"
+                                required
+                            >
+                        </div>
+
+                        <div class="input-group">
+                            <label for="cartUrl">Group Order Link *</label>
                             <div class="url-input-container">
                                 <input 
                                     type="url" 
                                     id="cartUrl" 
                                     name="cartUrl" 
-                                    placeholder="https://www.ubereats.com/group/..."
+                                    placeholder="https://drd.sh/cart/..."
                                     required
                                 >
                                 <button type="button" class="paste-btn" onclick="pasteFromClipboard()">

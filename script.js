@@ -20,15 +20,15 @@ class UberEatsMiniApp {
             this.telegram.expand();
             
             // Set theme colors to match our design
-            this.telegram.setHeaderColor('#8B5CF6');
-            this.telegram.setBackgroundColor('#8B5CF6');
+            this.telegram.setHeaderColor('#1A1A2E');
+            this.telegram.setBackgroundColor('#0F0F23');
             
             // Enable closing confirmation
             this.telegram.enableClosingConfirmation();
             
             // Set main button
             this.telegram.MainButton.setText('Start Automation');
-            this.telegram.MainButton.color = '#F59E0B';
+            this.telegram.MainButton.color = '#8B5CF6';
             this.telegram.MainButton.textColor = '#ffffff';
             
             console.log('Telegram WebApp initialized');
@@ -47,6 +47,23 @@ class UberEatsMiniApp {
         cartUrlInput.addEventListener('input', (e) => this.validateUrl(e.target.value));
         cartUrlInput.addEventListener('paste', (e) => this.handlePaste(e));
 
+        // Payment method selection
+        const paymentBtns = document.querySelectorAll('.payment-btn');
+        paymentBtns.forEach(btn => {
+            btn.addEventListener('click', () => this.selectPaymentMethod(btn));
+        });
+
+        // Order type selection
+        const orderTypeBtns = document.querySelectorAll('.order-type-btn');
+        orderTypeBtns.forEach(btn => {
+            btn.addEventListener('click', () => this.selectOrderType(btn));
+        });
+
+        // Add funds button
+        const addFundsBtn = document.querySelector('.add-funds-btn');
+        if (addFundsBtn) {
+            addFundsBtn.addEventListener('click', () => this.handleAddFunds());
+        }
 
         // Telegram main button
         if (this.telegram) {
@@ -77,17 +94,23 @@ class UberEatsMiniApp {
     handleFormSubmit(e) {
         e.preventDefault();
         
+        const fullName = document.getElementById('fullName').value.trim();
         const cartUrl = document.getElementById('cartUrl').value.trim();
+        
+        if (!fullName) {
+            this.showError('Please enter your full name');
+            return;
+        }
         
         if (!this.isValidUberEatsUrl(cartUrl)) {
             this.showError('Please enter a valid Uber Eats group cart URL');
             return;
         }
 
-        this.processCart(cartUrl);
+        this.processCart(cartUrl, fullName);
     }
 
-    async processCart(cartUrl) {
+    async processCart(cartUrl, fullName) {
         try {
             this.showLoading();
             this.updateLoadingStep(1, 'Connecting to Uber Eats...');
@@ -107,13 +130,14 @@ class UberEatsMiniApp {
             
             await this.delay(1000);
             this.hideLoading();
-            this.showSuccess('Order processed successfully!');
+            this.showSuccess(`Order processed successfully for ${fullName}!`);
             
             // Clear form
+            document.getElementById('fullName').value = '';
             document.getElementById('cartUrl').value = '';
             
             // Send data to backend (when implemented)
-            await this.sendToBackend(cartUrl);
+            await this.sendToBackend(cartUrl, fullName);
             
         } catch (error) {
             this.hideLoading();
@@ -122,10 +146,11 @@ class UberEatsMiniApp {
         }
     }
 
-    async sendToBackend(cartUrl) {
+    async sendToBackend(cartUrl, fullName) {
         // This will be implemented when backend is ready
         const payload = {
             cartUrl: cartUrl,
+            fullName: fullName,
             timestamp: new Date().toISOString()
         };
 
@@ -269,6 +294,29 @@ class UberEatsMiniApp {
 
     showSupport() {
         this.showSuccess('Need help? Contact support at support@imhungry.com');
+    }
+
+    // New interactive methods
+    selectPaymentMethod(selectedBtn) {
+        const paymentBtns = document.querySelectorAll('.payment-btn');
+        paymentBtns.forEach(btn => btn.classList.remove('active'));
+        selectedBtn.classList.add('active');
+        
+        const method = selectedBtn.textContent.trim();
+        this.showSuccess(`Payment method set to: ${method}`);
+    }
+
+    selectOrderType(selectedBtn) {
+        const orderTypeBtns = document.querySelectorAll('.order-type-btn');
+        orderTypeBtns.forEach(btn => btn.classList.remove('active'));
+        selectedBtn.classList.add('active');
+        
+        const type = selectedBtn.textContent.trim();
+        this.showSuccess(`Order type set to: ${type}`);
+    }
+
+    handleAddFunds() {
+        this.showSuccess('Add funds feature coming soon!');
     }
 
     // Recent Carts Management

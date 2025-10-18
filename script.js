@@ -264,11 +264,11 @@ class UberEatsMiniApp {
     }
 
     showAbout() {
-        this.showSuccess('Uber Eats Auto v1.0 - Automate your group orders!');
+        this.showSuccess('I\'m Hungry v1.0 - Automate your group orders!');
     }
 
     showSupport() {
-        this.showSuccess('Need help? Contact support at support@ubereatsauto.com');
+        this.showSuccess('Need help? Contact support at support@imhungry.com');
     }
 
     // Recent Carts Management
